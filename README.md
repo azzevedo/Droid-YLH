@@ -1,6 +1,7 @@
 # Português
 # Droid-YLH
-[Baseado no](https://github.com/i0Z3R0/YouLikeHits-Bot)
+[Baseado no YouLikeHits-Bot](https://github.com/i0Z3R0/YouLikeHits-Bot)
+
 Ferramenta para ganhar pontos no site YouLikeHits ao seguir perfis e curtir tweets
 
 # Requisitos
@@ -25,7 +26,8 @@ Caso essas ações não sejam contabilizadas no site youlikehits, os likes serã
 
 # English
 # Droid-YLH
-[Based on](https://github.com/i0Z3R0/YouLikeHits-Bot)
+[Based on YouLikeHits-Bot](https://github.com/i0Z3R0/YouLikeHits-Bot)
+
 This tool will earn you points on YouLikeHits site doing twitter follow and tweet likes
 
 # Prerequisites
