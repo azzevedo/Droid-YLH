@@ -3,6 +3,8 @@
 [Baseado no YouLikeHits-Bot](https://github.com/i0Z3R0/YouLikeHits-Bot)
 
 Ferramenta para ganhar pontos no site YouLikeHits ao seguir perfis e curtir tweets
+## Aviso
+Está funcional mas erros podem acontecer
 
 # Requisitos
 - Versão recente do Python3
@@ -29,6 +31,8 @@ Caso essas ações não sejam contabilizadas no site youlikehits, os likes serã
 [Based on YouLikeHits-Bot](https://github.com/i0Z3R0/YouLikeHits-Bot)
 
 This tool will earn you points on YouLikeHits site doing twitter follow and tweet likes
+# Warning
+It is functional but bug and errors may occur
 
 # Prerequisites
 - Latest version of Python3
