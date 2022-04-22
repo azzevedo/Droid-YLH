@@ -240,7 +240,7 @@ def findUnfollowButton(driver):
 	# Então vamos fazer um loop para achar seu número certo
 	for i in range(1, 10):
 		try:
-			ub = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, f'//*[@id="react-root"]/div/div/div[2]/main/div/div/div/div/div/div[2]/div/div/div/div/div[1]/div[2]/div[{i}]/div/div/div')))
+			ub = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, f'//*[@id="react-root"]/div/div/div[2]/main/div/div/div/div/div/div[2]/div/div/div/div/div[1]/div[2]/div[{i}]/div/div/div')))
 		except:
 			log(f'div[{i}]')
 		else:
@@ -291,16 +291,16 @@ def perfilExistente(driver):
 
 
 def twitterFollow(driver, url, wait):
-	# Loop infinito para recarregar a página com mais perfis
-	# TODO
-	# Talvez implementar um input com a quantidade de perfis que queira seguir
+	# Variável para controlar o loop infinito e recarregar a página com mais perfis
 	runningFree = True
+	# Acessar página
+	driver.get(url)
+	# Perguntar quantos perfis quer seguir
+	# Às vezes são poucos pontos, nem vale a pena
 	qtdFollow = getUserOption()
 	seguidos = 0
 
 	while runningFree:
-		# Acessar a página
-		driver.get(url)
 		# Definir janela principal
 		mainWindow = driver.window_handles[0]
 		# Definir ação para clicar quando necessário
@@ -429,3 +429,7 @@ def twitterFollow(driver, url, wait):
 				# Se, por algum motivo, não aparecer o botão de follow,
 				# talvez tenha algum outro problema com o perfil
 				print(e)
+
+		# Voltamos a acessar a página
+		if runningFree:
+			driver.get(url)
