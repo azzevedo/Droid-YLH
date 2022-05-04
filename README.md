@@ -17,7 +17,7 @@ Está funcional mas erros podem acontecer
 2. cd Droid-YLH
 3. pip3 install -r requirements.txt
 4. Inserir informações em settings.json
-5. python3 main_DroidYLH.py
+5. python3 main.py
 #### Nota: webdriver_manager irá baixar o ChromeDriver de acordo com seu Sistema Operacional.
 
 # Detalhes
@@ -45,7 +45,7 @@ It is functional but bug and errors may occur
 2. cd Droid-YLH
 3. pip3 install -r requirements.txt
 4. Fill in info in settings.json
-5. python3 main_DroidYLH.py
+5. python3 main.py
 #### Note: ChromeDriver is NOT required, webdriver_manager will automatically download the matching version of ChromeDriver for your OS.
 
 # Details
