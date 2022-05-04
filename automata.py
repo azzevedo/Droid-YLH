@@ -128,7 +128,7 @@ class Marvin():
 
 		url = 'https://www.youlikehits.com/favtweets.php'
 		# Controlar quantos likes já foram efetuados
-		cont = 15 # Mudar para 0 quando parar os testes
+		cont = 0
 
 		runningFree = True
 		# I'm running wild, I'm running free
