@@ -92,10 +92,10 @@ class Marvin():
 
 
 	def getStartPoints(self):
-		startpointsText = self.getCurrentPoints()
-		startpoints = int(startpointsText.replace(',', ''))
-		self.startpoints = startpoints
-		print(f'Você tem {startpointsText} pontos')
+		pointsText = self.getCurrentPoints()
+		points = int(pointsText.replace(',', ''))
+		print(f'Você tem {pointsText} pontos')
+		return points
 
 
 	def getCurrentPoints(self):
@@ -168,7 +168,7 @@ class Marvin():
 
 				if self.tweetHasBannedWords():
 					# Tem que dar skip se for um tweet nojento
-					self.skipTweet(i)
+					self.skipTweet(i, mainWindow)
 					continue
 
 				try:
@@ -186,7 +186,8 @@ class Marvin():
 					Então voltamos e pulamos o perfil
 					"""
 					# Pular perfil, 'i' é a tag iframe 'WebElement'
-					self.skipTweet(i)
+					self.log('|Algo de errado com esse tweet\nPróximo...')
+					self.skipTweet(i, mainWindow)
 					# Por garantia, mudar para a janela principal
 					self.driver.switch_to.window(mainWindow)
 					self.delay(2)
@@ -296,7 +297,7 @@ class Marvin():
 					WebDriverWait(self.driver, 3).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/div/div/div[2]/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/span')))
 
 					"""
-					Algumas vezes pegava o XPATH acima mas não era perfil válido, então ainda temos que checar a string na função perfilExistente
+					Algumas vezes pegava o XPATH acima mas era perfil válido, então ainda temos que checar a string no método __isProfileOK()
 					Todavia, se der exceção no XPATH acima, é um perfil ativo. Pois o mesmo (xpath) só aparece para indicar se o perfil está suspenso ou algo do tipo
 					"""
 					if not self.__isProfileOK():
@@ -347,7 +348,7 @@ class Marvin():
 						self.driver.switch_to.window(mainWindow)
 						# Skip no perfil
 						#TODO Talvez seja um erro momentâneo, poderia apenas dar unfollow. Num outro momento pode ser que funcione o follow
-						skipButtons[i].click()
+						#skipButtons[i].click()
 					else:
 						# Neste caso, computou o follow e só fechamos o popup e mudamos para a janela principal
 						self.driver.close()
@@ -432,6 +433,9 @@ class Marvin():
 			elif 'this account is temporarily restricted' in txt:
 				self.log('Perfil com problemas')
 				return False
+			elif 'these tweets are protected' in txt:
+				self.log('Tweets protegidos não contabilizam rápido')
+				return False
 		return True
 
 
@@ -470,11 +474,11 @@ class Marvin():
 	def dislike(self):
 		#TODO tava dando erro nessa parte
 		# Encontrar o coração do like e remover a curtida
-		dislikeButton = self.driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div[2]/main/div/div/div/div/div/section/div/div/div[1]/div/div[1]/article/div/div/div/div[3]/div[5]/div/div[3]/div')
+		dislikeButton = self.driver.find_element(By.XPATH, '/html/body/div[1]/div/div/div[2]/main/div/div/div/div/div/section/div/div/div[1]/div/div[1]/article/div/div/div/div[3]/div[6]/div/div[3]/div')
 		dislikeButton.click()
 
 
-	def skipTweet(self, frame):
+	def skipTweet(self, frame, mainWindow):
 		# Fechar popup e voltar à janela principal
 		self.driver.close()
 		self.driver.switch_to.window(mainWindow)
@@ -513,6 +517,7 @@ class Marvin():
 
 	def goodbye(self):
 		# Finalizar o driver
+		print('So long and thanks for all the fish')
 		self.driver.quit()
 
 
@@ -526,5 +531,8 @@ class Marvin():
 	def bonusPoints(self):
 		#TODO
 		# Pegar os bonus quando tiver feito 75 hits no dia
-		bonus_points = 'https://www.youlikehits.com/bonuspoints.php'
-		pass
+		url = 'https://www.youlikehits.com/bonuspoints.php'
+		self.driver.get(url)
+		bonusButton = self.driver.find_element(By.CLASS_NAME, 'buybutton')
+		self.pressIt(bonusButton)
+		self.driver.refresh()
