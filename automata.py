@@ -43,9 +43,7 @@ class Marvin():
 
 	def __importSettings(self):
 		# Abrir configurações do arquivo json
-		settingU = json.load(open('twitter.json'))
-		jcopy = json.dumps(settingU)
-		setting = json.loads(jcopy)
+		setting = json.load(open('twitter.json'))
 		return setting
 
 
