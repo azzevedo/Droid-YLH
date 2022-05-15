@@ -10,6 +10,8 @@ marvin.youLikeHitsLogin()
 marvin.confirmLogin()
 marvin.twitterLikes()
 marvin.twitterFollow()
+#TODO instagramLikes()
+#TODO pinterestFollow()
 marvin.showEarnedPoints()
 
 # marvin.bonusPoints()
